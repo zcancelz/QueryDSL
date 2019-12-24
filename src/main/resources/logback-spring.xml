@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <springProfile name="server">
+        <appender name="STD_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>/usr/local/logs/PallyConAPI_Console.log</file>
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] - %msg%n</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>/usr/local/logs/PallyConAPI_Console.%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+                <maxHistory>30</maxHistory>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>10MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+        </appender>
+        <appender name="STD_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>/usr/local/logs/PallyConAPI.log</file>
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <pattern>%msg%n</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>/usr/local/logs/PallyConAPI.%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+                <maxHistory>30</maxHistory>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>10MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+        </appender>
+        <root level="INFO">
+            <appender-ref ref="STDOUT" />
+            <appender-ref ref="STD_FILE" />
+        </root>
+        <logger name="org.apache.http.impl.conn.PoolingHttpClientConnectionManager" level="warn">
+            <appender-ref ref="STDOUT" />
+        </logger>
+        <logger name="com.zaxxer.hikari.pool.HikariPool" level="info">
+            <appender-ref ref="STDOUT" />
+        </logger>
+        <logger name="com.pallycon.admin" level="INFO">
+            <appender-ref ref="STD_LOG_FILE" />
+        </logger>
+    </springProfile>
+    <springProfile name="dev">
+        <appender name="STD_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>/usr/local/logs/PallyConAPI_Console.log</file>
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] - %msg%n</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>/usr/local/logs/PallyConAPI_Console.%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+                <maxHistory>30</maxHistory>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>10MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+        </appender>
+        <appender name="STD_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>/usr/local/logs/PallyConAPI.log</file>
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <pattern>%msg%n</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>/usr/local/logs/PallyConAPI.%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+                <maxHistory>30</maxHistory>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>10MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+        </appender>
+        <root level="DEBUG">
+            <appender-ref ref="STDOUT" />
+            <appender-ref ref="STD_FILE" />
+        </root>
+        <logger name="org.apache.http.impl.conn.PoolingHttpClientConnectionManager" level="warn">
+            <appender-ref ref="STDOUT" />
+        </logger>
+        <logger name="com.zaxxer.hikari.pool.HikariPool" level="info">
+            <appender-ref ref="STDOUT" />
+        </logger>
+        <logger name="com.pallycon.admin" level="DEBUG">
+            <appender-ref ref="STD_LOG_FILE" />
+        </logger>
+        <logger name="org.apache.http.impl.conn.PoolingHttpClientConnectionManager" level="INFO">
+        </logger>
+
+    </springProfile>
+    <springProfile name="dev-local">
+        <appender name="DEV_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>D:/project/workspace_intelliJ/AdminAPI/logs/PallyConAPI_DEV_Console.log</file>
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <pattern>[%d{yyyy-MM-dd HH:mm:ss}:%-3relative][%thread] %-5level %logger{35} - %msg%n</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>D:/project/workspace_intelliJ/AdminAPI/logs/PallyConAPI_DEV_Console.%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+                <maxHistory>30</maxHistory>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>10MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+        </appender>
+        <appender name="DEV_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>D:/project/workspace_intelliJ/AdminAPI/logs/PallyConAPI_Log.log</file>
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <pattern>%msg%n</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>D:/project/workspace_intelliJ/AdminAPI/logs/PallyConAPI_DEV_Log.%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+                <maxHistory>30</maxHistory>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>10MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+        </appender>
+        <root level="DEBUG">
+            <appender-ref ref="STDOUT" />
+            <appender-ref ref="DEV_FILE" />
+        </root>
+        <logger name="jdbc.sqlonly" level="DEBUG">
+            <appender-ref ref="STDOUT" />
+        </logger>
+        <logger name="org.apache.http.impl.conn.PoolingHttpClientConnectionManager" level="warn">
+            <appender-ref ref="STDOUT" />
+        </logger>
+        <logger name="com.zaxxer.hikari.pool.HikariPool" level="info">
+            <appender-ref ref="STDOUT" />
+        </logger>
+
+        <logger name="com.pallycon.admin" level="DEBUG">
+            <appender-ref ref="STDOUT" />
+            <appender-ref ref="DEV_LOG_FILE" />
+        </logger>
+    </springProfile>
+</configuration>
